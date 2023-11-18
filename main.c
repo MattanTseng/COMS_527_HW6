@@ -23,7 +23,7 @@ int main() {
 	time_t doneLoadTime = time(NULL);
 
 
-	NeuralNetwork* net = network_create(784, 300, 10, 0.1);
+	NeuralNetwork* net = network_create(784, 1000, 10, 0.1);
 	
 	time_t startTrainTime = time(NULL);
 	network_train_batch_imgs(net, imgs, number_imgs);
