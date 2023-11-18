@@ -15,23 +15,23 @@ int main() {
 	//TRAINING
 	printf("Starting training\n");
 	// record the start time
-	time_t startTime = time();
+	time_t startTime = time(NULL);
 
 	int number_imgs = 10000;
-	time_t startLoadTime = time();
+	time_t startLoadTime = time(NULL);
 	Img** imgs = csv_to_imgs("./data/mnist_test.csv", number_imgs);
-	time_t doneLoadTime = time();
+	time_t doneLoadTime = time(NULL);
 
 
 	NeuralNetwork* net = network_create(784, 1000, 10, 0.1);
 	
-	time_t startTrainTime = time();
+	time_t startTrainTime = time(NULL);
 	network_train_batch_imgs(net, imgs, number_imgs);
 	time_t doneTrainTime = clock();
 	
 	network_save(net, "testing_net");
 
-	time_t endTime = time();
+	time_t endTime = time(NULL);
 
 	double trainingTime = (double)(doneTrainTime - startTrainTime); // / CLOCKS_PER_SEC;
 	double imageLoadTime = (double)(doneLoadTime - startLoadTime); // / CLOCKS_PER_SEC;
