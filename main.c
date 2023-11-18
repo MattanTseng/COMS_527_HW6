@@ -10,8 +10,6 @@
 
 int main() {
 	srand(time(NULL));
-
-
 	//TRAINING
 	printf("Starting training\n");
 	// record the start time
@@ -27,7 +25,7 @@ int main() {
 	
 	time_t startTrainTime = time(NULL);
 	network_train_batch_imgs(net, imgs, number_imgs);
-	time_t doneTrainTime = clock();
+	time_t doneTrainTime = time(NULL);
 	
 	network_save(net, "testing_net");
 
@@ -43,7 +41,7 @@ int main() {
 	printf("Total time: %f \n", totalTime);
 
 
-	// time_t startTime = clock(); 
+	// time_t startTime = time(NULL); 
 	// int number_imgs = 3000;
 	// Img** imgs = csv_to_imgs("data/mnist_test.csv", number_imgs);
 	// NeuralNetwork* net = network_load("testing_net");
@@ -53,7 +51,7 @@ int main() {
 	// imgs_free(imgs, number_imgs);
 	// network_free(net);
 
-	// time_t endTime = clock();
+	// time_t endTime = time(NULL);
 
 	// double inferenceTime = (double)(endTime - startTime) / CLOCKS_PER_SEC;
 	// printf("Inference time: %f \n", inferenceTime);
