@@ -8,7 +8,7 @@
 #include "../neural/activations.h"
 
 #define MAXCHAR 1000
-#define NUM_THREADS 24
+#define NUM_THREADS 25
 
 // 784, 300, 10
 NeuralNetwork* network_create(int input, int hidden, int output, double lr) {
