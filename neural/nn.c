@@ -8,6 +8,7 @@
 #include "../neural/activations.h"
 
 #define MAXCHAR 1000
+#define NUMTHREADS 25
 
 // 784, 300, 10
 NeuralNetwork* network_create(int input, int hidden, int output, double lr) {
@@ -128,6 +129,7 @@ Matrix* network_predict_img(NeuralNetwork* net, Img* img) {
 
 double network_predict_imgs(NeuralNetwork* net, Img** imgs, int n) {
 	int n_correct = 0;
+#	pragma omp parallel for num_threads(NUM_THREADS)
 	for (int i = 0; i < n; i++) {
 		Matrix* prediction = network_predict_img(net, imgs[i]);
 		if (matrix_argmax(prediction) == imgs[i]->label) {
