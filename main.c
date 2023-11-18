@@ -13,7 +13,7 @@ int main() {
 	srand(time(NULL));
 
 	//TRAINING
-	printf("Starting training");
+	printf("Starting training\n");
 	// record the start time
 	time_t startTime = clock();
 
@@ -23,7 +23,7 @@ int main() {
 	time_t doneLoadTime = clock();
 
 
-	NeuralNetwork* net = network_create(784, 300, 10, 0.1);
+	NeuralNetwork* net = network_create(784, 1000, 10, 0.1);
 	
 	time_t startTrainTime = clock();
 	network_train_batch_imgs(net, imgs, number_imgs);

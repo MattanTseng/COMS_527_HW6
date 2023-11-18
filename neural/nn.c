@@ -25,6 +25,7 @@ NeuralNetwork* network_create(int input, int hidden, int output, double lr) {
 	return net;
 }
 
+
 void network_train(NeuralNetwork* net, Matrix* input, Matrix* output) {
 	// Feed forward
 	Matrix* hidden_inputs	= dot(net->hidden_weights, input);
