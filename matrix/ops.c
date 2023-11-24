@@ -196,8 +196,7 @@ Matrix* addScalar(double n, Matrix* m) {
 Matrix* transpose(Matrix* m) {
 	Matrix* mat = matrix_create(m->cols, m->rows);
 	double **mat_entries = mat->entries;
-	double n_scale = n;
-	#pragma omp target enter data map(to:n_scale)
+
 	#pragma omp target enter data map(alloc: mat_entries[:mat->rows * mat->cols])
 	#pragma omp target teams distribute parallel for collapse(2) thread_limit(NUM_THREADS)
 	for (int i = 0; i < m->rows; i++) {
