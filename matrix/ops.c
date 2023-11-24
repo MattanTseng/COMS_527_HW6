@@ -162,16 +162,13 @@ Matrix* dot(Matrix *m1, Matrix *m2) {
 
 Matrix* scale(double n, Matrix* m) {
 	Matrix* mat = matrix_copy(m);
-	double **mat_entries = mat->entries;
-	double n_scale = n;
-	#pragma omp target enter data map(to:n_scale)
+#   pragma omp target
+#   pragma omp parallel for num_threads(NUM_THREADS) collapse(2)
 
-	#pragma omp target enter data map(alloc: mat_entries[:mat->rows * mat->cols])
-
-	#pragma omp target teams distribute parallel for collapse(2) thread_limit(NUM_THREADS)
 	for (int i = 0; i < m->rows; i++) {
 		for (int j = 0; j < m->cols; j++) {
-			mat->entries[i][j] = mat_entries[i][j] * n;
+			mat->entries[i][j] *= n;
+			// mat->entries[i][j] = mat_entries[i][j] * n;
 		}
 	}
 	return mat;
@@ -180,14 +177,13 @@ Matrix* scale(double n, Matrix* m) {
 Matrix* addScalar(double n, Matrix* m) {
 	Matrix* mat = matrix_copy(m);
 
-	double **mat_entries = mat->entries;
-	double n_scale = n;
-	#pragma omp target enter data map(to:n_scale)
-	#pragma omp target enter data map(alloc: mat_entries[:mat->rows * mat->cols])
-	#pragma omp target teams distribute parallel for collapse(2) thread_limit(NUM_THREADS)
+	#pragma omp target
+	#pragma omp parallel for num_threads(NUM_THREADS) collapse(2)
+
 	for (int i = 0; i < m->rows; i++) {
 		for (int j = 0; j < m->cols; j++) {
-			mat->entries[i][j] = mat_entries[i][j] + n;
+			mat->entries[i][j] += n;
+			// mat->entries[i][j] = mat_entries[i][j] + n;
 		}
 	}
 	return mat;
